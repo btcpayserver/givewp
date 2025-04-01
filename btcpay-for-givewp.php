@@ -110,7 +110,7 @@ final class BTCPayForGiveWP {
 	 * Admin notice for when Give is not active
 	 */
 	public function adminNotice() {
-		if (!$this->is_give_active()) {
+		if (!$this->isGiveActive()) {
 			?>
             <div class="error">
                 <p><?php _e('Give must be installed and activated for the BTCPay for GiveWP Gateway add-on to work.', 'btcpay-for-givewp'); ?></p>
