@@ -61,7 +61,7 @@ class BtcpayGateway extends PaymentGateway
 	 */
 	public function getPaymentMethodLabel(): string
 	{
-		return __('Pay with Bitcoin / Lightning Network (BTCPay)', 'btcpay-for-givewp');
+		return __('Bitcoin / Lightning Network (via BTCPay)', 'btcpay-for-givewp');
 	}
 	
 	public static function webhookUrl(): string
@@ -134,6 +134,11 @@ class BtcpayGateway extends PaymentGateway
 		$checkoutOptions = new InvoiceCheckoutOptions();
 		$checkoutOptions->setRedirectUrl($returnUrl);
 		
+		// Additional metadata for the invoice
+		$metadata = [
+			'orderUrl' => admin_url('edit.php?post_type=give_forms&page=give-payment-history&view=view-payment-details&id=' . absint($donation->id))	
+		];
+		
 		try {
 			$client = new Invoice($btcpayUrl, $apiKey);
 			
@@ -143,7 +148,7 @@ class BtcpayGateway extends PaymentGateway
 				PreciseNumber::ParseFloat($donation->amount->formatToDecimal()),
 			    $donation->id,
 				null,
-				null,
+				$metadata,
 				$checkoutOptions
 			);
 			
@@ -168,7 +173,7 @@ class BtcpayGateway extends PaymentGateway
 		
 		DonationNote::create([
 			'donationId' => $donationId,
-			'content' => 'Donor returned via redirect link from BTCPay invoice payment page.'
+			'content' => __('Donor returned via redirect link from BTCPay invoice payment page.', 'btcpay-for-givewp')
 		]);
 
 		return new RedirectResponse($successUrl);
@@ -216,7 +221,7 @@ class BtcpayGateway extends PaymentGateway
 					
 					DonationNote::create([
 						'donationId' => $donationId,
-						'content' => 'BTCPay Webhook: Payment received but not confirmed. Invoice ID: ' . $payload->invoiceId
+						'content' => __('BTCPay Webhook: (Partial) payment received but not confirmed. Invoice ID: ' . $payload->invoiceId, 'btcpay-for-givewp')
 					]);
 					break;
 				case 'InvoiceSettled':
@@ -225,18 +230,26 @@ class BtcpayGateway extends PaymentGateway
 					
 					DonationNote::create([
 						'donationId' => $donationId,
-						'content' => 'BTCPay Webhook: Payment complete (settled).'
+						'content' => __('BTCPay Webhook: Payment complete (settled).', 'btcpay-for-givewp')
 					]);
 					break;
 				case 'InvoiceExpired':
 					// Handle invoice expired event
-					$donation->status = DonationStatus::ABANDONED();
+					if ($payload->partiallyPaid) {
+						$donation->status = DonationStatus::PROCESSING();
+						
+						DonationNote::create([
+							'donationId' => $donationId,
+							'content' => __('BTCPay Webhook: Invoice expired BUT has a partial payment. NEEDS MANUAL CHECKING (on BTCPay).', 'btcpay-for-givewp')
+						]);
+					} else {
+						$donation->status = DonationStatus::ABANDONED();
 
-					DonationNote::create([
-						'donationId' => $donationId,
-						'content' => 'BTCPay Webhook: Invoice expired without any payment.'
-					]);
-					
+						DonationNote::create([
+							'donationId' => $donationId,
+							'content' => __('BTCPay Webhook: Invoice expired without any payment.', 'btcpay-for-givewp')
+						]);
+					}
 					break;
 				case 'InvoiceInvalid':
 					// Handle invoice invalid event
@@ -244,7 +257,7 @@ class BtcpayGateway extends PaymentGateway
 
 					DonationNote::create([
 						'donationId' => $donationId,
-						'content' => 'Payment was set invalid manually on BTCPay.'
+						'content' => __('Payment was set invalid manually on BTCPay.', 'btcpay-for-givewp')
 					]);
 					
 					break;
