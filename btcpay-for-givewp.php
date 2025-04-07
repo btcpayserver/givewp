@@ -1,6 +1,6 @@
 <?php
 /**
- * Plugin Name: BTCPay Server for GiveWP
+ * Plugin Name: BTCPay for GiveWP
  * Plugin URI: https://docs.btcpayserver.org/GiveWP/
  * Description: BTCPay Server Bitcoin / Lightning Network payment gateway integration for GiveWP
  * Version: 1.0.0

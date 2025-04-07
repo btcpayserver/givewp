@@ -1,4 +1,4 @@
-=== BTCPay Server for GiveWP ===
+=== BTCPay for GiveWP ===
 Contributors: ndeet
 Tags: Bitcoin, BTCPay Server, cryptocurrency, GiveWP, donations, fundraising, gateway
 Requires at least: 5.0
