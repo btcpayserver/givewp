@@ -158,7 +158,7 @@ class BtcpayGateway extends PaymentGateway
 			
 			return new RedirectOffsite($invoice->getCheckoutLink());
 		} catch (\Exception $e) {
-			throw new \Exception('Failed to create invoice on BTCPay: ' . $e->getMessage());
+			throw new \Exception('Failed to create invoice on BTCPay: ' . esc_html($e->getMessage()));
 		}
 	}
 
@@ -202,7 +202,6 @@ class BtcpayGateway extends PaymentGateway
 				);
 			}
 		} catch (\Exception $e) {
-			error_log('BTCPay for GiveWP: ' . $e->getMessage());
 			wp_die('Webhook request validation failed.');
 		}
 		
@@ -221,7 +220,11 @@ class BtcpayGateway extends PaymentGateway
 					
 					DonationNote::create([
 						'donationId' => $donationId,
-						'content' => __('BTCPay Webhook: (Partial) payment received but not confirmed. Invoice ID: ' . $payload->invoiceId, 'btcpay-for-givewp')
+						'content' => sprintf(
+						    /* translators: %s: Invoice ID */
+							__('BTCPay Webhook: (Partial) payment received but not confirmed. Invoice ID: ', 'btcpay-for-givewp'),
+							$payload->invoiceId
+						)
 					]);
 					break;
 				case 'InvoiceSettled':
@@ -262,7 +265,7 @@ class BtcpayGateway extends PaymentGateway
 					
 					break;
 				default:
-					error_log('Unhandled BTCPay Server webhook event: ' . $payload->eventType);
+					// Need to return http success to not break webhook delivery.
 					return true;
 			}
 						
@@ -283,7 +286,7 @@ class BtcpayGateway extends PaymentGateway
 			$invoice = $client->getInvoice(give_get_option('btcpay_store_id'), $invoiceId);
 			return $invoice;
 		} catch (\Exception $e) {
-			throw new \Exception('Failed to load invoice from BTCPay: ' . $e->getMessage());
+			throw new \Exception('Failed to load invoice from BTCPay: ' . esc_html($e->getMessage()));
 		}
 	}	
 

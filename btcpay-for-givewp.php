@@ -113,7 +113,7 @@ final class BTCPayForGiveWP {
 		if (!$this->isGiveActive()) {
 			?>
             <div class="error">
-                <p><?php _e('Give must be installed and activated for the BTCPay for GiveWP Gateway add-on to work.', 'btcpay-for-givewp'); ?></p>
+                <p><?php esc_html_e('Give must be installed and activated for the BTCPay for GiveWP Gateway add-on to work.', 'btcpay-for-givewp'); ?></p>
             </div>
 			<?php
 		}

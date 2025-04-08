@@ -102,7 +102,7 @@ class Settings {
 		}
 
 		// Verify nonce
-		if (!wp_verify_nonce($_POST['_give-save-settings'], 'give-save-settings')) {
+		if (!isset($_POST['_give-save-settings']) || !wp_verify_nonce($_POST['_give-save-settings'], 'give-save-settings')) {
 			return;
 		}
 
@@ -227,8 +227,9 @@ class Settings {
 		if (is_wp_error($response)) {
 			return new \WP_Error(
 				'btcpay_api_error',
+				/* translators: 1: Error message */
 				sprintf(
-					__('Failed to connect to BTCPay Server: %s', 'btcpay-for-givewp'),
+					'Failed to connect to BTCPay Server: %s',
 					$response->get_error_message()
 				)
 			);
@@ -238,8 +239,8 @@ class Settings {
 		if ($response_code !== 200) {
 			return new \WP_Error(
 				'btcpay_api_error',
-				sprintf(
-					__('Invalid API credentials. BTCPay Server returned: %s', 'btcpay-for-givewp'),
+				sprintf( 
+                   'Invalid API credentials. BTCPay Server returned: %s',
 					wp_remote_retrieve_response_message($response)
 				)
 			);
@@ -266,7 +267,7 @@ class Settings {
                 }
             }
         } catch (\Exception $e) {
-            throw new \Exception($e->getMessage());
+            throw new \Exception(esc_html($e->getMessage()));
         }
         
         return false;
@@ -300,7 +301,7 @@ class Settings {
             return $webhook;
             
         } catch (\Exception $e) {
-            throw new \Exception($e->getMessage());
+            throw new \Exception(esc_html($e->getMessage()));
         }
     }
 }
