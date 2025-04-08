@@ -1,0 +1,126 @@
+# Copyright (C) 2025 BTCPay Server integrations team
+# This file is distributed under the MIT.
+msgid ""
+msgstr ""
+"Project-Id-Version: BTCPay for GiveWP 1.0.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/btcpay-for-givewp\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2025-04-08T10:05:55+02:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.11.0\n"
+"X-Domain: btcpay-for-givewp\n"
+
+#. Plugin Name of the plugin
+#: btcpay-for-givewp.php
+msgid "BTCPay for GiveWP"
+msgstr ""
+
+#. Plugin URI of the plugin
+#: btcpay-for-givewp.php
+msgid "https://docs.btcpayserver.org/GiveWP/"
+msgstr ""
+
+#. Description of the plugin
+#: btcpay-for-givewp.php
+msgid "BTCPay Server Bitcoin / Lightning Network payment gateway integration for GiveWP"
+msgstr ""
+
+#. Author of the plugin
+#: btcpay-for-givewp.php
+msgid "BTCPay Server integrations team"
+msgstr ""
+
+#. Author URI of the plugin
+#: btcpay-for-givewp.php
+msgid "https://btcpayserver.org"
+msgstr ""
+
+#: btcpay-for-givewp.php:116
+msgid "Give must be installed and activated for the BTCPay for GiveWP Gateway add-on to work."
+msgstr ""
+
+#: src/Admin/Settings.php:45
+msgid "BTCPay Gateway"
+msgstr ""
+
+#: src/Admin/Settings.php:63
+msgid "BTCPay Server Gateway Settings"
+msgstr ""
+
+#: src/Admin/Settings.php:67
+msgid "BTCPay Server URL"
+msgstr ""
+
+#: src/Admin/Settings.php:68
+msgid "Enter the URL where you log into your BTCPay Server. e.g. https://mainnet.demo.btcpayserver.org"
+msgstr ""
+
+#: src/Admin/Settings.php:75
+msgid "Store ID"
+msgstr ""
+
+#: src/Admin/Settings.php:76
+msgid "Enter your BTCPay Server Store ID."
+msgstr ""
+
+#: src/Admin/Settings.php:83
+msgid "API Key"
+msgstr ""
+
+#: src/Admin/Settings.php:84
+msgid "Enter your BTCPay API key."
+msgstr ""
+
+#: src/Admin/Settings.php:125
+msgid "BTCPay for GiveWP: BTCPay Server API credentials verified successfully!"
+msgstr ""
+
+#: src/Admin/Settings.php:130
+msgid "BTCPay for GiveWP: Webhook already exists, no need to create it."
+msgstr ""
+
+#: src/Admin/Settings.php:137
+msgid "BTCPay for GiveWP: Webhook successfully created."
+msgstr ""
+
+#: src/Gateway/BtcpayGateway.php:56
+msgid "BTCPay Server Gateway"
+msgstr ""
+
+#: src/Gateway/BtcpayGateway.php:64
+msgid "Bitcoin / Lightning Network (via BTCPay)"
+msgstr ""
+
+#: src/Gateway/BtcpayGateway.php:99
+#: src/Gateway/BtcpayGateway.php:109
+msgid "You will be redirected to a payment page to complete the donation."
+msgstr ""
+
+#: src/Gateway/BtcpayGateway.php:176
+msgid "Donor returned via redirect link from BTCPay invoice payment page."
+msgstr ""
+
+#. translators: %s: Invoice ID
+#: src/Gateway/BtcpayGateway.php:225
+msgid "BTCPay Webhook: (Partial) payment received but not confirmed. Invoice ID: "
+msgstr ""
+
+#: src/Gateway/BtcpayGateway.php:236
+msgid "BTCPay Webhook: Payment complete (settled)."
+msgstr ""
+
+#: src/Gateway/BtcpayGateway.php:246
+msgid "BTCPay Webhook: Invoice expired BUT has a partial payment. NEEDS MANUAL CHECKING (on BTCPay)."
+msgstr ""
+
+#: src/Gateway/BtcpayGateway.php:253
+msgid "BTCPay Webhook: Invoice expired without any payment."
+msgstr ""
+
+#: src/Gateway/BtcpayGateway.php:263
+msgid "Payment was set invalid manually on BTCPay."
+msgstr ""
