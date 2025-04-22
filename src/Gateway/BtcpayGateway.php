@@ -189,7 +189,7 @@ class BtcpayGateway extends PaymentGateway
 		$headers = getallheaders();
 		foreach ($headers as $key => $value) {
 			if (strtolower($key) === 'btcpay-sig') {
-				$signature = $value;
+				$signature = sanitize_text_field($value);
 			}
 		}
 		
@@ -206,14 +206,14 @@ class BtcpayGateway extends PaymentGateway
 		}
 		
 		// Load the donation reference from the payload
-		$invoice = $this->loadInvoice($payload->invoiceId);
+		$invoice = $this->loadInvoice(sanitize_text_field($payload->invoiceId));
 		$donationId = (int) $invoice->getData()['metadata']['orderId'];
 		
 		if ($donationId) {
 			$donation = Donation::find($donationId);
 			
 			// Process webhook events
-			switch ($payload->type) {
+			switch (sanitize_text_field($payload->type)) {
 				case 'InvoiceReceivedPayment':
 					// As soon as we receive a payment, we update donation status.
 					$donation->status = DonationStatus::PROCESSING();
@@ -223,7 +223,7 @@ class BtcpayGateway extends PaymentGateway
 						'content' => sprintf(
 						    /* translators: %s: Invoice ID */
 							__('BTCPay Webhook: (Partial) payment received but not confirmed. Invoice ID: ', 'btcpay-for-givewp'),
-							$payload->invoiceId
+							sanitize_text_field($payload->invoiceId)
 						)
 					]);
 					break;
@@ -273,7 +273,7 @@ class BtcpayGateway extends PaymentGateway
 			$donation->save();
 		} else {
 			// Do not throw error here as we don't want to break the webhook delivery on BTCPay Server side.
-			error_log('Invalid donation ID in webhook payload.');
+			wp_debug_log('Invalid donation ID in webhook payload.');
 		}
 	}
 	

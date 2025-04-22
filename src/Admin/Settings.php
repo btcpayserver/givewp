@@ -97,12 +97,12 @@ class Settings {
 	 * Handle settings save and API validation
 	 */
 	public function handleSettingsSave() {
-		if (!$this->isSettingsSaveRequest()) {
+		// Verify nonce
+		if (!isset($_POST['_give-save-settings']) || !wp_verify_nonce(sanitize_text_field(wp_unslash($_POST['_give-save-settings'])), 'give-save-settings')) {
 			return;
 		}
 
-		// Verify nonce
-		if (!isset($_POST['_give-save-settings']) || !wp_verify_nonce(sanitize_text_field(wp_unslash($_POST['_give-save-settings'])), 'give-save-settings')) {
+		if (!$this->isSettingsSaveRequest()) {
 			return;
 		}
 
@@ -111,9 +111,9 @@ class Settings {
 			return;
 		}
 
-		$btcpay_url = isset($_POST['btcpay_url']) ? esc_url_raw($_POST['btcpay_url']) : '';
-		$store_id = isset($_POST['btcpay_store_id']) ? sanitize_text_field($_POST['btcpay_store_id']) : '';
-		$api_key = isset($_POST['btcpay_api_key']) ? sanitize_text_field($_POST['btcpay_api_key']) : '';
+		$btcpay_url = isset($_POST['btcpay_url']) ? esc_url_raw(wp_unslash($_POST['btcpay_url'])) : '';
+		$store_id = isset($_POST['btcpay_store_id']) ? sanitize_text_field(wp_unslash($_POST['btcpay_store_id'])) : '';
+		$api_key = isset($_POST['btcpay_api_key']) ? sanitize_text_field(wp_unslash($_POST['btcpay_api_key'])) : '';
 
 		// Only validate if all fields are filled
 		if ($btcpay_url && $store_id && $api_key) {
