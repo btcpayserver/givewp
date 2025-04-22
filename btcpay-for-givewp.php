@@ -58,9 +58,6 @@ final class BTCPayForGiveWP {
 	 * Plugin Constructor
 	 */
 	private function __construct() {
-		// Load text domain
-		add_action('init', [$this, 'loadTextdomain']);
-
 		// Admin notice if Give is not active
 		add_action('admin_notices', [$this, 'adminNotice']);
 	}
@@ -93,17 +90,6 @@ final class BTCPayForGiveWP {
 	 */
 	private function isGiveActive() {
 		return class_exists('Give');
-	}
-
-	/**
-	 * Load plugin text domain
-	 */
-	public function loadTextdomain() {
-		load_plugin_textdomain(
-			'btcpay-for-givewp',
-			false,
-			dirname(plugin_basename(__FILE__)) . '/languages'
-		);
 	}
 
 	/**
