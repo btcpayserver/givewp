@@ -102,7 +102,7 @@ class Settings {
 		}
 
 		// Verify nonce
-		if (!isset($_POST['_give-save-settings']) || !wp_verify_nonce($_POST['_give-save-settings'], 'give-save-settings')) {
+		if (!isset($_POST['_give-save-settings']) || !wp_verify_nonce(sanitize_text_field(wp_unslash($_POST['_give-save-settings'])), 'give-save-settings')) {
 			return;
 		}
 
