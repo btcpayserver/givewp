@@ -1,7 +1,7 @@
 === BTCPay for GiveWP ===
 Contributors: ndeet
 Tags: Bitcoin, BTCPay Server, cryptocurrency, GiveWP, donations
-Requires at least: 5.0
+Requires at least: 6.0
 Tested up to: 6.8
 Stable tag: 1.0.0
 Requires Give: 2.24.0

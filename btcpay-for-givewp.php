@@ -12,7 +12,7 @@
  * License URI: https://opensource.org/licenses/MIT
  * Requires PHP: 8.1
  * Requires at least: 6.0
- * Tested up to: 6.7
+ * Tested up to: 6.8
  * Requires Plugins: give
  * GiveWP tested up to: 3.22.2
  */

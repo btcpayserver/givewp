@@ -238,7 +238,7 @@ class BtcpayGateway extends PaymentGateway
 					break;
 				case 'InvoiceExpired':
 					// Handle invoice expired event
-					if ($payload->partiallyPaid) {
+					if (rest_sanitize_boolean($payload->partiallyPaid)) {
 						$donation->status = DonationStatus::PROCESSING();
 						
 						DonationNote::create([
