@@ -3,7 +3,7 @@ Contributors: ndeet
 Tags: Bitcoin, BTCPay Server, cryptocurrency, GiveWP, donations
 Requires at least: 6.0
 Tested up to: 6.8
-Stable tag: 1.0.1
+Stable tag: 1.0.2
 Requires Give: 2.24.0
 Requires PHP: 8.1
 License: MIT
@@ -107,6 +107,9 @@ You'll find extensive documentation and answers to many of your questions on [BT
 
 
 == Changelog ==
+
+= 1.0.2 :: 2025-05-27 =
+* Fix missing BTCPay library dependency
 
 = 1.0.1 :: 2025-05-27 =
 * Fix slug in workflow

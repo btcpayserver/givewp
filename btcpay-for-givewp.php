@@ -3,7 +3,7 @@
  * Plugin Name: BTCPay for GiveWP
  * Plugin URI: https://docs.btcpayserver.org/GiveWP/
  * Description: BTCPay Server Bitcoin / Lightning Network payment gateway integration for GiveWP
- * Version: 1.0.1
+ * Version: 1.0.2
  * Author: BTCPay Server integrations team
  * Author URI: https://btcpayserver.org
  * Text Domain: btcpay-for-givewp
@@ -23,7 +23,7 @@ if (!defined('ABSPATH')) {
 }
 
 // Define plugin constants
-define('BTCPAY_FOR_GIVEWP_VERSION', '1.0.1');
+define('BTCPAY_FOR_GIVEWP_VERSION', '1.0.2');
 define('BTCPAY_FOR_GIVEWP_DIR', plugin_dir_path(__FILE__));
 define('BTCPAY_FOR_GIVEWP_URL', plugin_dir_url(__FILE__));
 
