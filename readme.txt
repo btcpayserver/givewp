@@ -47,56 +47,58 @@ The non-profit [BTCPay Server Foundation ](https://foundation.btcpayserver.org) 
 
 == Installation ==
 
-This plugin requires GiveWP. Please make sure you have GiveWP installed.
+### Requirements ###
 
-To add BTCPay Server as payment gateway to GiveWP, follow the steps below or check our official [installation instructions](https://docs.btcpayserver.org/GiveWP/).
-
-### 1. Deploy BTCPay Server (optional) ###
-
-This step is optional, if you already have a BTCPay Server instance setup you can skip to section 2. below. To launch your BTCPay server, you can self-host it, or use a third party host.
-
-#### 1.1 Self-hosted BTCPay ####
-
-There are various ways to [launch a self-hosted BTCPay](https://github.com/btcpayserver/btcpayserver-doc#deployment). If you do not have technical knowledge, use the [web-wizard method](https://launchbtcpay.lunanode.com) and follow the video below.
-
-https://www.youtube.com/watch?v=NjslXYvp8bk
-
-For the self-hosted solutions, you will have to wait for your node to sync fully before proceeding to step 3.
-
-#### 1.2 Third-party host ####
-
-Those who just want to test BTCPay out, or are okay with the limitations of a third-party hosting (dependency and privacy, as well as lack of some features) can use a one of many [third-party hosts](ThirdPartyHosting.md).
-
-The video below shows you how to connect your store to such a host.
-
-https://www.youtube.com/watch?v=IT2K8It3S3o
+- PHP version 8.1 or newer
+- The cURL, gd, intl, json, and mbstring PHP extensions are available
+- A WordPress site with GiveWP installed ([Installation instructions](https://wordpress.org/plugins/give/)
+- You have a BTCPay Server version 2.0.0 or later, either [self-hosted](https://docs.btcpayserver.org/Deployment) or [hosted by a third-party](https://docs.btcpayserver.org/Deployment/ThirdPartyHosting)
+- [You've a registered account on the instance](https://docs.btcpayserver.org/RegisterAccount)
+- [You've a BTCPay store on the instance](https://docs.btcpayserver.org/CreateStore)
+- [You've a wallet connected to your store](https://docs.btcpayserver.org/WalletSetup)
 
 ### 2. Install BTCPay for GiveWP Plugin ###
 
-BTCPay for GiveWP plugin is a bridge between your BTCPay Server (payment processor) and your donation forms. No matter if you are using a self-hosted or third-party solution from step 1., the connection process is identical.
+BTCPay for GiveWP plugin is a bridge between your BTCPay Server (payment processor) and your donation forms. No matter if you are using a self-hosted or third-party solution, the connection process is identical.
 
 You can find detailed installation instructions on our [GiveWP documentation](https://docs.btcpayserver.org/GiveWP/).
 
-###  3. Connecting your wallet ###
+### 2.1 Install via WordPress Admin ###
 
-No matter if you're using self-hosted or server hosted by a third-party, the process of configuring your wallet is the same.
+In your WordPress admin, go to **Plugins > Add New** and search for **BTCPay for GiveWP**. Click on **Install Now** and then **Activate**.
 
-https://www.youtube.com/watch?v=xX6LyQej0NQ
+### 3. Configure BTCPay for GiveWP ###
 
-### 4. Testing the checkout ###
+In your WordPress admin, go to **GiveWP > Settings > Payment Gateways** and click on **BTCPay for GiveWP**. You will need to enter the following information:
+- **BTCPay Server URL**: The URL of your BTCPay Server instance (e.g., `https://btcpay.example.com`)
+- **Store ID**: The ID of your BTCPay store (you can find it in the store settings on your BTCPay Server instance)
+- **API Key**: The API key for your BTCPay store (you can create it in the store settings on your BTCPay Server instance). See [here](https://docs.btcpayserver.org/GiveWP#generate-api-key) for instructions on how to generate an API key.
 
-Making a small test-donation, will give you a piece of mind. Always make sure that everything is set up correctly before going live. The final video, guides you through the steps of setting a gap limit in your Electrum wallet and testing the checkout process.
+After you save the settings, the plugin will automatically connect to your BTCPay Server instance and create a webhook to receive payment notifications.
+You should see the following notifications:
+- BTCPay for GiveWP: BTCPay Server API credentials verified successfully.
+- BTCPay for GiveWP: Webhook successfully created.
+
+### 4. Enable BTCPay for GiveWP ###
+
+Now on the top of the BTCPay for GiveWP settings page, click on **Gateways** and make sure there is a checkmark set to enable the "BTCPay Server Gateway". You can also change the text of the payment gateway, it defaults to "Bitcoin".
+
+### 5. Test the Payment Gateway ###
+
+You are good to go! You can now test the payment gateway by creating a new donation form in GiveWP and selecting the BTCPay Server payment gateway at checkout.
 
 == Frequently Asked Questions ==
 
-You'll find extensive documentation and answers to many of your questions on [BTCPay for GiveWP docs](https://docs.btcpayserver.org/GiveWP).
+You'll find extensive documentation and answers to many of your questions on [BTCPay for GiveWP docs](https://docs.btcpayserver.org/GiveWP#troubleshooting).
 
 == Screenshots ==
 
-1. Provides a Bitcoin / Lightning Network (and other) payment gateway on checkout.
+1. Provides a Bitcoin / Lightning Network (and other) payment gateway on donation forms.
 2. Your customers can pay by scanning the QR-Code with their wallet or copy and paste the receiving address.
 3. After successful payment the customers will get redirected to the order page. The order will be marked as paid automatically.
-4. On BTCPay Server you have extensive reporting and accounting features.
+4. On backend, in GiveWP donations overview, you can see the payment status as paid.
+5. The BTCPay for GiveWP settings page.
+6. On BTCPay you will have extensive reporting and accounting features, including CSV exports.
 
 == Upgrade Notice ==
 
@@ -105,5 +107,5 @@ You'll find extensive documentation and answers to many of your questions on [BT
 
 
 == Changelog ==
-= 1.0.0 :: 2025-04-02 =
+= 1.0.0 :: 2025-05-27 =
 * Initial release
